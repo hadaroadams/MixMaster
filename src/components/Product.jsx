@@ -11,7 +11,7 @@ const Product = ({image,title,category,id,name}) => {
             <p>{name}</p>
             <p>{category}</p>
         </div>
-        <Link className='bg-green-400 rounded px-4 py-2 m-6'>Details</Link>
+        <Link to={`/product/${id}`} className='bg-green-400 rounded px-4 py-2 m-6'>Details</Link>
     </article>
   )
 }

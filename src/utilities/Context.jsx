@@ -5,11 +5,30 @@ const AppContext = createContext()
 
 export const Context = ({children}) => {
     const [cockTails,setCocktails]= useState([])
+    const [searchCockTails,setSearchCockTails]=useState('')
+    const [isDone,setIsDone] = useState(false)
+    const [isError,SetIsError] = useState(false)
+    
     useEffect(()=>{
-        apiFetch()
-    },[])
+        const api =async()=>{
+              console.log(searchCockTails)
+            try{
+                const data= await apiFetch(searchCockTails)
+                setCocktails(data)
+                setIsDone(true)
+                SetIsError(false)
+                console.log(data,cockTails)
+            }catch(e){
+              isDone(false)
+               SetIsError(true)
+                console.log(e)
+
+            }
+        }
+        api()
+    },[searchCockTails])
   return (
-    <AppContext.Provider>
+    <AppContext.Provider value={{cockTails,setSearchCockTails,searchCockTails,isDone,setIsDone,isError}}>
       {children}
     </AppContext.Provider>
   )
